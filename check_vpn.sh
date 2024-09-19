@@ -42,9 +42,13 @@ function check_vpn() {
 
 # Function to determine current ISP and take action if VPN is lost
 function get_isp() {
-    response=$($CURL_CMD -s http://ip-api.com/json)
-    if [ $? -ne 0 ] || [ -z "$response" ]; then
-        log_write 1 "Failed to retrieve location data"
+    if ! response=$($CURL_CMD -s http://ip-api.com/json); then
+        log_write 1 "Failed to retrieve location data (curl error)"
+        return 1
+    fi
+
+    if [ -z "$response" ]; then
+        log_write 1 "Empty response received from the API"
         return 1
     fi
 
