@@ -12,14 +12,25 @@ This repository contains a Bash script (`check_vpn.sh`) designed to monitor your
 
 Ensure that the necessary packages are installed:
 
-```sudo apt-get install curl iputils-ping bsdutils jq
-Clone the repository with submodules:
+```
+sudo apt-get install curl iputils-ping bsdutils jq
+```
 
+Clone the repository with submodules:
 ```
 git clone --recurse-submodules https://github.com/macg4dave/check_vpn
-cd check_vpn
-sudo cp -rv check_vpn /usr/local/share/bin
-sudo chmod +x /usr/local/share/bin/check_vpn.sh
+sudo cp -rv check_vpn /usr/local/share/bin/
+sudo chmod +x /usr/local/share/bin/check_vpn/check_vpn.sh
+sudo mv /usr/local/share/bin/check_vpn/check_vpn.service /etc/systemd/system/
+```
+
+Check the Service is running
+```
+sudo systemctl daemon-reload
+sudo systemctl enable check_vpn.service
+sudo systemctl start check_vpn.service
+```
+
 Configuration
 Edit the check_vpn.sh script to adjust the variables as needed.
 
