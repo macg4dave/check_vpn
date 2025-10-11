@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/check_vpn/check_vpn.sh
+ExecStart=/usr/local/share/bin/check_vpn/check_vpn.sh
 Restart=on-failure
 RestartSec=5s
 KillSignal=SIGINT
